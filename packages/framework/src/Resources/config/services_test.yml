@@ -130,8 +130,6 @@ services:
 
     Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade: ~
 
-    Shopsys\FrameworkBundle\Component\System\PostgresqlLocaleMapper: ~
-
     Shopsys\FrameworkBundle\Model\Product\ProductDataFactory: ~
 
     Shopsys\FrameworkBundle\Model\Product\ProductFacade: ~
@@ -153,8 +151,6 @@ services:
     Shopsys\FrameworkBundle\Model\Product\ProductRepository: ~
 
     Shopsys\FrameworkBundle\Model\Script\ScriptFacade: ~
-
-    Shopsys\FrameworkBundle\Component\System\System: ~
 
     Shopsys\FrameworkBundle\Model\Localization\TranslatableListener: ~
 
