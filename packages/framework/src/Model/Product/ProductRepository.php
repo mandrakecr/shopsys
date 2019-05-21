@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
 use Shopsys\FrameworkBundle\Component\Paginator\QueryPaginator;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
@@ -767,5 +768,21 @@ class ProductRepository
         }
 
         return $product;
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductQuery $query
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    public function findByQuery(ProductQuery $query): PaginationResult
+    {
+        $queryBuilder = $this->getProductRepository()->createQueryBuilder('p');
+        if ($query->getUuids()) {
+            $queryBuilder->andWhere('p.uuid IN (:uuids)');
+            $queryBuilder->setParameter(':uuids', $query->getUuids());
+        }
+
+        $queryPaginator = new QueryPaginator($queryBuilder);
+        return $queryPaginator->getResult($query->getPage(), $query->getPageSize());
     }
 }

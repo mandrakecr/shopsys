@@ -5,6 +5,7 @@ namespace Shopsys\FrameworkBundle\Model\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Image\ImageFacade;
+use Shopsys\FrameworkBundle\Component\Paginator\PaginationResult;
 use Shopsys\FrameworkBundle\Component\Plugin\PluginCrudExtensionFacade;
 use Shopsys\FrameworkBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupRepository;
@@ -210,6 +211,15 @@ class ProductFacade
     public function getById($productId)
     {
         return $this->productRepository->getById($productId);
+    }
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductQuery $query
+     * @return \Shopsys\FrameworkBundle\Component\Paginator\PaginationResult
+     */
+    public function findByQuery(ProductQuery $query): PaginationResult
+    {
+        return $this->productRepository->findByQuery($query);
     }
 
     /**
