@@ -13,7 +13,6 @@ class Version20190521071335 extends AbstractMigration
     public function up(Schema $schema)
     {
         $this->sql('ALTER TABLE products ADD uuid UUID DEFAULT NULL');
-        $this->sql('COMMENT ON COLUMN products.uuid IS \'(DC2Type:uuid)\'');
         $this->sql('UPDATE products SET uuid = uuid_generate_v1()');
         $this->sql('ALTER TABLE products ALTER uuid SET NOT NULL');
         $this->sql('CREATE UNIQUE INDEX UNIQ_B3BA5A5AD17F50A6 ON products (uuid)');

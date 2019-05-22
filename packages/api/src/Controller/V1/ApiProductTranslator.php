@@ -32,7 +32,7 @@ class ApiProductTranslator
         $longDescriptions = $this->translateLongDescriptions($product);
 
         return [
-            'uuid' => $product->getUuid()->toString(),
+            'uuid' => $product->getUuid(),
             'name' => $names,
             'hidden' => $product->isHidden(),
             'sellingDenied' => $product->getCalculatedSellingDenied(),
