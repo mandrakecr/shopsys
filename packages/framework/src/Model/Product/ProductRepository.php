@@ -753,4 +753,19 @@ class ProductRepository
 
         return $product;
     }
+
+    /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
+     */
+    public function getOneByUuid(string $uuid): Product
+    {
+        $product = $this->getProductRepository()->findOneBy(['uuid' => $uuid]);
+
+        if ($product === null) {
+            throw new \Shopsys\FrameworkBundle\Model\Product\Exception\ProductNotFoundException('Product with UUID ' . $uuid . ' does not exist.');
+        }
+
+        return $product;
+    }
 }

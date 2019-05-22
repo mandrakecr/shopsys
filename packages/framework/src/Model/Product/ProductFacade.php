@@ -426,4 +426,13 @@ class ProductFacade
     {
         return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);
     }
+
+    /**
+     * @param string $uuid
+     * @return \Shopsys\FrameworkBundle\Model\Product\Product
+     */
+    public function getByUuid(string $uuid): Product
+    {
+        return $this->productRepository->getOneByUuid($uuid);
+    }
 }

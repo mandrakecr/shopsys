@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
             new Intaro\PostgresSearchBundle\IntaroPostgresSearchBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
@@ -33,6 +34,7 @@ class AppKernel extends Kernel
             new Shopsys\ProductFeed\HeurekaDeliveryBundle\ShopsysProductFeedHeurekaDeliveryBundle(),
             new Shopsys\ProductFeed\ZboziBundle\ShopsysProductFeedZboziBundle(),
             new Shopsys\ProductFeed\GoogleBundle\ShopsysProductFeedGoogleBundle(),
+            new Shopsys\ApiBundle\ShopsysApiBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
@@ -48,6 +50,7 @@ class AppKernel extends Kernel
             new Shopsys\FrameworkBundle\ShopsysFrameworkBundle(),
             new Shopsys\ReadModelBundle\ShopsysReadModelBundle(), // has to be loaded after ShopsysFrameworkBundle because it overrides Twig `image` function
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
+            new FOS\RestBundle\FOSRestBundle(),
         ];
 
         if ($this->getEnvironment() === EnvironmentType::DEVELOPMENT) {

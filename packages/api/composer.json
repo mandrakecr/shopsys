@@ -1,0 +1,28 @@
+{
+    "name": "shopsys/api",
+    "type": "library",
+    "description": "Shopsys Framework API support",
+    "keywords": ["api", "Shopsys Framework", "SSFW"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shopsys",
+            "homepage": "https://www.shopsys.com/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopsys\\ApiBundle\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "friendsofsymfony/rest-bundle": "^2.5",
+        "jms/serializer-bundle": "^2.4",
+        "ramsey/uuid": "^3.8",
+        "ramsey/uuid-doctrine": "^1.5",
+        "shopsys/framework": "^dev-master"
+    }
+}

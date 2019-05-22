@@ -20,7 +20,8 @@
       "Shopsys\\ProductFeed\\HeurekaBundle\\": "packages/product-feed-heureka/src/",
       "Shopsys\\ProductFeed\\HeurekaDeliveryBundle\\": "packages/product-feed-heureka-delivery/src/",
       "Shopsys\\ReadModelBundle\\": "packages/read-model/src/",
-      "Shopsys\\FrameworkBundle\\": "packages/framework/src/"
+      "Shopsys\\FrameworkBundle\\": "packages/framework/src/",
+      "Shopsys\\ApiBundle\\": "packages/api/src/"
     },
     "classmap": [
       "packages/framework/src/Component/Filesystem/Flysystem/VolumeDriver.php",
@@ -90,6 +91,7 @@
     "egeloen/ordered-form": "^3.0",
     "elasticsearch/elasticsearch": "^6.0.1",
     "friendsofphp/php-cs-fixer": "^2.14.0",
+    "friendsofsymfony/rest-bundle": "^2.5",
     "fp/jsformvalidator-bundle": "^1.5.1",
     "fzaninotto/faker": "^1.7.1",
     "gedmo/doctrine-extensions": "^2.4.34",
@@ -103,6 +105,7 @@
     "jdorn/sql-formatter": "^1.2",
     "jms/metadata": "^1.6",
     "jms/translation-bundle": "^1.4.1",
+    "jms/serializer-bundle": "^2.4",
     "joschi127/doctrine-entity-override-bundle": "^0.5.0",
     "knplabs/knp-menu-bundle": "^2.2.1",
     "league/flysystem": "^1.0",
@@ -115,6 +118,7 @@
     "prezent/doctrine-translatable": "^1.2",
     "prezent/doctrine-translatable-bundle": "^1.0.3",
     "psr/log": "^1.0",
+    "ramsey/uuid": "^3.8",
     "sensio/distribution-bundle": "^5.0.21",
     "sensio/framework-extra-bundle": "^3.0.29",
     "sensio/generator-bundle": "^3.1.7",
@@ -209,6 +213,7 @@
     "shopsys/product-feed-heureka-delivery": "self.version",
     "shopsys/read-model": "self.version",
     "shopsys/framework": "self.version",
-    "shopsys/coding-standards": "self.version"
+    "shopsys/coding-standards": "self.version",
+    "shopsys/api": "self.version"
   }
 }
