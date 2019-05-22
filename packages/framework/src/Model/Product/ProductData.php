@@ -167,6 +167,11 @@ class ProductData
      */
     public $pluginData;
 
+    /**
+     * @var \Ramsey\Uuid\UuidInterface|null
+     */
+    public $uuid;
+
     public function __construct()
     {
         $this->name = [];
