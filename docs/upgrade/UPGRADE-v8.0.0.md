@@ -28,7 +28,7 @@ There you can find links to upgrade notes for other versions too.
 
     In case of extending one of these classes, you should add an `EntityNameResolver` to a constructor and use it in a `create()` method to resolve correct class to return.
 - run `php phing standards-fix` so all nullable values will be now defined using nullability (?) symbol ([#1010](https://github.com/shopsys/shopsys/pull/1010))
-- update PHP version in your `composer.json` in `require` and `config` section to `7.2` ([#1066](https://github.com/shopsys/shopsys/pull/1066))
+- update PHP version in your `composer.json` in `require` and `config` section to `7.2` because version `7.1` is no longer supported in Shopsys Framework ([#1066](https://github.com/shopsys/shopsys/pull/1066))
 
 ### Tools
 - improve `build-dev.xml` to use test prefix for elasticsearch in tests ([#933](https://github.com/shopsys/shopsys/pull/933))
