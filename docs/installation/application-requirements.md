@@ -23,6 +23,7 @@ To be able to install, develop and run Shopsys Framework, the system should have
 * [Redis](https://github.com/MicrosoftArchive/redis/releases)
 * [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
     * [Java SDK](https://www.oracle.com/technetwork/java/javase/overview/index.html)
+    * [ICU Analysis plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/current/analysis-icu.html)
 * [SMTP server](https://www.hmailserver.com/)
 * [Selenium Server](https://www.npmjs.com/package/selenium-standalone#install--run)
 * (*optional*) [Nginx](http://nginx.org/en/docs/install.html)
