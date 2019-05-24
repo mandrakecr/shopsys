@@ -52,9 +52,11 @@ class ApiProductTranslator
      */
     protected function translateNames(Product $product): array
     {
-        return array_map(static function (string $locale) use ($product) {
-            return $product->getName($locale);
-        }, $this->domain->getAllLocales());
+        $result = [];
+        foreach ($this->domain->getAllLocales() as $locale) {
+            $result[$locale] = $product->getName($locale);
+        }
+        return $result;
     }
 
     /**
@@ -63,9 +65,11 @@ class ApiProductTranslator
      */
     protected function translateShortDescriptions(Product $product): array
     {
-        return array_map(static function (int $domainId) use ($product) {
-            return $product->getShortDescription($domainId);
-        }, $this->domain->getAllIds());
+        $result = [];
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $result[$domainId] = $product->getShortDescription($domainId);
+        }
+        return $result;
     }
 
     /**
@@ -74,9 +78,11 @@ class ApiProductTranslator
      */
     protected function translateLongDescriptions(Product $product): array
     {
-        return array_map(static function (int $domainId) use ($product) {
-            return $product->getDescription($domainId);
-        }, $this->domain->getAllIds());
+        $result = [];
+        foreach ($this->domain->getAllIds() as $domainId) {
+            $result[$domainId] = $product->getDescription($domainId);
+        }
+        return $result;
     }
 
     /**

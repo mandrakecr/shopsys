@@ -777,6 +777,7 @@ class ProductRepository
     public function findByQuery(ProductQuery $query): PaginationResult
     {
         $queryBuilder = $this->getProductRepository()->createQueryBuilder('p');
+        $queryBuilder->orderBy('p.id');
         if ($query->getUuids()) {
             $queryBuilder->andWhere('p.uuid IN (:uuids)');
             $queryBuilder->setParameter(':uuids', $query->getUuids());

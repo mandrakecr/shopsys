@@ -8,8 +8,11 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
-use Shopsys\ApiBundle\Component\HeaderLinks\HeaderLinks;
+use Shopsys\ApiBundle\Component\HeaderLinks\HeaderLinksTransformer;
+use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
+use Shopsys\FrameworkBundle\Model\Product\ProductQuery;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,11 +26,30 @@ class ProductController extends AbstractFOSRestController
     private $productFacade;
 
     /**
-     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     * @var \Shopsys\ApiBundle\Controller\V1\ApiProductTranslator
      */
-    public function __construct(ProductFacade $productFacade)
+    private $productTransformer;
+
+    /**
+     * @var \Shopsys\ApiBundle\Component\HeaderLinks\HeaderLinksTransformer
+     */
+    private $linksTransformer;
+
+    /**
+     * @var int
+     */
+    protected $pageSize = 2;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductFacade $productFacade
+     * @param \Shopsys\ApiBundle\Controller\V1\ApiProductTranslator $productTransformer
+     * @param \Shopsys\ApiBundle\Component\HeaderLinks\HeaderLinksTransformer $linksTransformer
+     */
+    public function __construct(ProductFacade $productFacade, ApiProductTranslator $productTransformer, HeaderLinksTransformer $linksTransformer)
     {
         $this->productFacade = $productFacade;
+        $this->productTransformer = $productTransformer;
+        $this->linksTransformer = $linksTransformer;
     }
 
     /**
@@ -39,8 +61,9 @@ class ProductController extends AbstractFOSRestController
     public function getProductAction(string $uuid): Response
     {
         $product = $this->productFacade->getByUuid($uuid);
+        $productArray = $this->productTransformer->translate($product);
 
-        return $this->handleView(View::create($product, 200));
+        return $this->handleView(View::create($productArray, 200));
     }
 
     /**
@@ -49,21 +72,29 @@ class ProductController extends AbstractFOSRestController
      * @QueryParam(name="page", requirements="\d+", default=1)
      * @QueryParam(name="uuids", map=true, requirements="[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}", allowBlank=false)
      * @param \FOS\RestBundle\Request\ParamFetcher $paramFetcher
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getProductsAction(ParamFetcher $paramFetcher): Response
+    public function getProductsAction(ParamFetcher $paramFetcher, Request $request): Response
     {
-        $products = $this->productFacade->getById(1);
-
         $page = (int)$paramFetcher->get('page');
+
+        $query = new ProductQuery($this->pageSize, $page);
+
         $filterUuids = $paramFetcher->get('uuids');
-        $isFilterUuid = is_array($filterUuids); // if there are no uuids, $filterUuids === ''
+        if (is_array($filterUuids)) {
+            $query = $query->withUuids($filterUuids);
+        }
 
-        $links = (new HeaderLinks())
-            ->add('http://localhost:8000/api/v1/products?page=2', 'next')
-            ->add('http://localhost:8000/api/v1/products?page=30', 'last');
+        $productsResult = $this->productFacade->findByQuery($query);
 
-        $view = View::create($products, 200, ['Link', $links->format()]);
+        $productsArray = array_map(function (Product $product) {
+            return $this->productTransformer->translate($product);
+        }, $productsResult->getResults());
+
+        $links = $this->linksTransformer->fromPaginationResult($productsResult, $request->getUri());
+
+        $view = View::create($productsArray, 200, ['Link' => $links->format()]);
 
         return $this->handleView($view);
     }
