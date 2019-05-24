@@ -26,18 +26,18 @@ There you can find links to upgrade notes for other versions too.
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <project name="Shopsys Framework" default="list">
-    
+
         <property file="${project.basedir}/build/build.local.properties"/>
-    
+
         <property name="path.root" value="${project.basedir}"/>
         <property name="path.vendor" value="${path.root}/vendor"/>
         <property name="path.framework" value="${path.vendor}/shopsys/framework"/>
-    
+
         <import file="${path.framework}/build.xml"/>
-    
+
         <property name="is-multidomain" value="true"/>
         <property name="phpstan.level" value="0"/>
-    
+
     </project>
     ```
 - we recommend upgrading PHPStan to level 4 [#1040](https://github.com/shopsys/shopsys/pull/1040)
